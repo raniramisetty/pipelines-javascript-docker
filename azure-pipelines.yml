@@ -12,17 +12,11 @@ resources:
 - repo: self
 
 variables:
-  tag: '$(Build.BuildId)'
+  tag: 'test1-$(Build.BuildId)'
 
 
 steps:
-- task: Docker@2
-  displayName: Build an image
-  inputs:
-    command: build
-    dockerfile: '$(Build.SourcesDirectory)/app/Dockerfile'
-    tags: |
-      $(tag)
+
 - task: Docker@2
   inputs:
     containerRegistry: 'ranidemos'
