@@ -24,3 +24,5 @@ steps:
     repository: 'reddyrani/demos'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
+    tags: |
+        $(tag) 
