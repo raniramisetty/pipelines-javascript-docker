@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mydeploymentpod
+  labels:
+    app: mydeploymentpod
+spec:
+  # replicas: 1
+  selector:
+    matchLabels:
+      app: mydeploymentpod
+  template:
+    metadata:
+      labels:
+        app: mydeploymentpod
+    spec:
+      containers:
+        - name: honemydeploymentpodynodepod
+          image: docker.io/reddyrani/devops:101
+          resources:
+            limits:
+              memory: "50Mi"
+              cpu: 10m
+            requests:
+              memory: "10Mi"
+              cpu: 10m
+          ports:
+          - containerPort: 8080
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-kubenode-service
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    targetPort: 8080
+    # protocol: TCP
+    # nodePort: 32299
+  selector:
+    app: mydeploymentpod
+  # selector:
+  #   app: honeynodepod
+  # ports:
+    # type: {{ .Values.serviceType }}
+    # - port: 3000
+    #   targetPort: 3000
+    #   protocol: TCP
+    #   nodePort: 32000
+    # selector:
+    #   app: honeynodepod
